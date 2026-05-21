@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutreachAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #000;
+      color: white;
+      font-family: Inter, sans-serif;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    textarea::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 py-24 text-center">
+    <div class="inline-flex px-4 py-2 rounded-full glass text-sm text-zinc-300 mb-8">
+      AI Powered Cold Outreach Platform
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight max-w-5xl mx-auto">
+      Generate Personalized Cold Emails That Actually Convert
+    </h1>
+
+    <p class="mt-8 text-zinc-400 text-xl max-w-2xl mx-auto leading-relaxed">
+      OutreachAI analyzes company websites and generates high-converting outreach emails for freelancers, agencies, and founders.
+    </p>
+
+    <div class="mt-10 flex justify-center gap-4 flex-wrap">
+      <a href="#generator" class="px-8 py-4 bg-white text-black rounded-2xl font-semibold hover:scale-105 transition">
+        Start Free
+      </a>
+
+      <button class="px-8 py-4 rounded-2xl border border-zinc-700 hover:bg-zinc-900 transition">
+        Watch Demo
+      </button>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">Website Intelligence</h3>
+        <p class="text-zinc-400 leading-relaxed">
+          Scrape websites and extract pain points, business context, and opportunities automatically.
+        </p>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">AI Email Generation</h3>
+        <p class="text-zinc-400 leading-relaxed">
+          Generate highly personalized cold emails instead of generic AI sludge people delete instantly.
+        </p>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">Follow-Up Automation</h3>
+        <p class="text-zinc-400 leading-relaxed">
+          Generate natural follow-up sequences without sounding like a motivational LinkedIn parasite.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GENERATOR -->
+  <section id="generator" class="max-w-7xl mx-auto px-6 py-24">
+
+    <div class="grid lg:grid-cols-2 gap-10">
+
+      <!-- FORM -->
+      <div class="glass rounded-3xl p-8">
+
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold">Generate Email</h2>
+
+          <div class="text-sm text-zinc-500">
+            AI SaaS Dashboard
+          </div>
+        </div>
+
+        <div class="space-y-4">
+
+          <input
+            id="company"
+            type="text"
+            placeholder="Company Name"
+            class="w-full bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          />
+
+          <input
+            id="website"
+            type="text"
+            placeholder="Website URL"
+            class="w-full bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          />
+
+          <input
+            id="target"
+            type="text"
+            placeholder="Target Person Name"
+            class="w-full bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          />
+
+          <input
+            id="service"
+            type="text"
+            placeholder="Your Service"
+            class="w-full bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          />
+
+          <textarea
+            id="pain"
+            placeholder="Pain Points"
+            class="w-full h-40 bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          ></textarea>
+
+          <select
+            id="tone"
+            class="w-full bg-black border border-zinc-800 rounded-2xl p-4 outline-none"
+          >
+            <option>Professional</option>
+            <option>Friendly</option>
+            <option>Confident</option>
+            <option>Aggressive Sales</option>
+            <option>Concise</option>
+          </select>
+
+          <button
+            onclick="generateEmail()"
+            class="w-full bg-white text-black py-4 rounded-2xl font-semibold hover:scale-[1.02] transition"
+          >
+            Generate Email
+          </button>
+
+        </div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="glass rounded-3xl p-8">
+
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-3xl font-bold">Generated Email</h2>
+
+          <button
+            onclick="copyEmail()"
+            class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition text-sm"
+          >
+            Copy
+          </button>
+        </div>
+
+        <textarea
+          id="output"
+          class="w-full h-[600px] bg-black border border-zinc-800 rounded-2xl p-6 text-zinc-300 leading-relaxed outline-none"
+        >Your generated email will appear here...</textarea>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+
+    <div class="grid md:grid-cols-4 gap-6">
+
+      <div class="glass rounded-3xl p-8 text-center">
+        <div class="text-4xl font-bold">2,430</div>
+        <div class="mt-2 text-zinc-500">Emails Generated</div>
+      </div>
+
+      <div class="glass rounded-3xl p-8 text-center">
+        <div class="text-4xl font-bold">41%</div>
+        <div class="mt-2 text-zinc-500">Reply Rate</div>
+      </div>
+
+      <div class="glass rounded-3xl p-8 text-center">
+        <div class="text-4xl font-bold">12%</div>
+        <div class="mt-2 text-zinc-500">Conversion Rate</div>
+      </div>
+
+      <div class="glass rounded-3xl p-8 text-center">
+        <div class="text-4xl font-bold">$4.2K</div>
+        <div class="mt-2 text-zinc-500">Revenue Generated</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+
+    <div class="text-center mb-20">
+      <h2 class="text-5xl font-bold">Pricing</h2>
+      <p class="mt-4 text-zinc-500 text-lg">
+        Simpler pricing. Because SaaS founders discovered confusing pricing tables and never emotionally recovered.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="glass rounded-3xl p-10">
+        <h3 class="text-3xl font-bold">Free</h3>
+        <div class="text-5xl font-bold mt-6">$0</div>
+
+        <ul class="mt-8 space-y-4 text-zinc-400">
+          <li>• 10 emails/day</li>
+          <li>• Basic personalization</li>
+          <li>• Community support</li>
+        </ul>
+
+        <button class="mt-10 w-full bg-white text-black py-4 rounded-2xl font-semibold">
+          Get Started
+        </button>
+      </div>
+
+      <div class="glass rounded-3xl p-10 border border-white">
+        <h3 class="text-3xl font-bold">Pro</h3>
+        <div class="text-5xl font-bold mt-6">$29</div>
+
+        <ul class="mt-8 space-y-4 text-zinc-400">
+          <li>• Unlimited emails</li>
+          <li>• AI optimization</li>
+          <li>• Analytics dashboard</li>
+        </ul>
+
+        <button class="mt-10 w-full bg-white text-black py-4 rounded-2xl font-semibold">
+          Upgrade
+        </button>
+      </div>
+
+      <div class="glass rounded-3xl p-10">
+        <h3 class="text-3xl font-bold">Agency</h3>
+        <div class="text-5xl font-bold mt-6">$99</div>
+
+        <ul class="mt-8 space-y-4 text-zinc-400">
+          <li>• Team members</li>
+          <li>• Campaign builder</li>
+          <li>• Priority support</li>
+        </ul>
+
+        <button class="mt-10 w-full bg-white text-black py-4 rounded-2xl font-semibold">
+          Contact Sales
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-zinc-900 mt-20">
+
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+
+      <div>
+        <h3 class="text-2xl font-bold">OutreachAI</h3>
+
+        <p class="text-zinc-500 mt-2">
+          AI outreach platform for freelancers and agencies.
+        </p>
+      </div>
+
+      <div class="text-zinc-600 text-sm">
+        © 2026 OutreachAI. Built with APIs and startup optimism.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+
+    async function generateEmail() {
+
+      const company = document.getElementById('company').value
+      const website = document.getElementById('website').value
+      const target = document.getElementById('target').value
+      const service = document.getElementById('service').value
+      const pain = document.getElementById('pain').value
+      const tone = document.getElementById('tone').value
+
+      const output = document.getElementById('output')
+
+      output.value = 'Generating personalized email...'
+
+      try {
+
+        // Replace with your deployed backend API URL
+        const response = await fetch('https://your-backend-api.com/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            company,
+            website,
+            target,
+            service,
+            pain,
+            tone
+          })
+        })
+
+        const data = await response.json()
+
+        output.value = data.email
+
+      } catch (error) {
+
+        output.value = `
+Subject: Quick idea for improving conversions
+
+Hey ${target || 'there'},
+
+I was checking out ${company || 'your company'} and noticed a few areas where the user experience and conversion flow could likely be improved.
+
+I help businesses improve website performance and increase lead generation through optimized UX and automation.
+
+Would you be open to a quick audit video showing a few actionable improvements?
+
+Best,
+Your Name
+        `
+
+      }
+    }
+
+    function copyEmail() {
+
+      const output = document.getElementById('output')
+
+      output.select()
+      document.execCommand('copy')
+
+      alert('Email copied successfully')
+    }
+
+  </script>
+
+</body>
+</html>
